@@ -12,8 +12,6 @@ ALTER TABLE medical_histories ADD FOREIGN KEY (patient_id) REFERENCES patients(i
 
 ALTER TABLE invoices ADD FOREIGN KEY (medical_histories_id) REFERENCES medical_histories(id);
 
-/* Henary Update*/
-
 ALTER TABLE invoices ADD CONSTRAINT UQ_Invoices_MedicalHistories UNIQUE (medical_histories_id);
 
 ALTER TABLE invoice_items ADD FOREIGN KEY (invoices_id) REFERENCES invoices(id);
@@ -25,3 +23,18 @@ CREATE TABLE treatments_histories (medical_histories_id INT, treatments_id INT);
 ALTER TABLE treatments_histories ADD FOREIGN KEY (medical_histories_id) REFERENCES medical_histories(id);
 
 ALTER TABLE treatments_histories ADD FOREIGN KEY (treatments_id) REFERENCES treatments(id);
+
+/* INDEXING */
+
+CREATE INDEX patient_id_asc ON medical_histories (patient_id ASC);
+
+CREATE INDEX medical_histories_id_asc ON invoices (medical_histories_id ASC);
+
+CREATE INDEX invoices_id_asc ON  invoice_items (invoices_id ASC);
+
+CREATE INDEX treatments_id_asc ON invoice_items (treatments_id ASC);
+
+CREATE INDEX treatments_id_asc ON treatments_histories (treatments_id ASC);
+
+CREATE INDEX medical_histories_id_asc ON treatments_histories (medical_histories_id ASC);
+
